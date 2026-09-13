@@ -6,8 +6,6 @@ import static ru.iteco.fmhandroid.ui.data.Helper.randomCategory;
 import static ru.iteco.fmhandroid.ui.pageObject.ControlPanelPage.STATUS_ACTIVE;
 import static ru.iteco.fmhandroid.ui.pageObject.ControlPanelPage.STATUS_NOT_ACTIVE;
 
-import android.view.View;
-
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import org.junit.Before;
@@ -24,7 +22,6 @@ import ru.iteco.fmhandroid.ui.pageObject.AuthorizationPage;
 import ru.iteco.fmhandroid.ui.pageObject.NavigationBar;
 import ru.iteco.fmhandroid.ui.pageObject.ControlPanelPage;
 import ru.iteco.fmhandroid.ui.pageObject.CreateEditNewsPage;
-import ru.iteco.fmhandroid.ui.pageObject.MainPage;
 import ru.iteco.fmhandroid.ui.pageObject.NewsPage;
 
 
@@ -42,10 +39,9 @@ public class CreateEditNewsPageTest {
     CreateEditNewsPage createEditNewsPage = new CreateEditNewsPage();
     NewsPage newsPage = new NewsPage();
     String randomTitle = Data.NEWS_TITLE_TEXT + generateRandomThreeDigitString();
-    private View decorView;
 
     @Before
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
         } catch (Exception e) {
@@ -54,7 +50,7 @@ public class CreateEditNewsPageTest {
         }
         authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
         authPage.clickOnSignIn();
-        Thread.sleep(1000);
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnNews();
         newsPage.openControlPanelPage();
@@ -62,8 +58,8 @@ public class CreateEditNewsPageTest {
 
     // Creating News - страница создания новости
     @Test
-    @DisplayName("Доступность выбора одного значения из списка в поле Category на странице Creating News")
-    public void theFieldShouldAcceptAllNewsCategories() {
+    @DisplayName("Заполнение поочередно каждым значением из списка в поле Category на странице Creating News")
+    public void shouldFillFieldOfCategoryByEachNewsCategoryInCreating() {
         controlPanelPage.openCreatingNewsPage();
         createEditNewsPage.verifySelectedCategories();
     }
@@ -83,7 +79,7 @@ public class CreateEditNewsPageTest {
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
@@ -96,78 +92,84 @@ public class CreateEditNewsPageTest {
 
     @Test
     @DisplayName("Закрытие диалогового окна без выхода со страницы создания новости при нажатии на кнопку CANCEL в окне")
-    public void shouldReturnToCreatingNews() {
+    public void shouldCloseAlertDialogByCancelButton() {
         controlPanelPage.openCreatingNewsPage();
         createEditNewsPage.enterCategoryNews(Data.TRADE_UNION_CATEGORY);
-        createEditNewsPage.pressCancel();
-        createEditNewsPage.pressCancelAlertDialog();
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnCancelAlertDialog();
         createEditNewsPage.checkSearchResultIsDisplayed(Data.TRADE_UNION_CATEGORY);
     }
 
     @Test
     @DisplayName("Отмена создания новости и возврат на страницу Control panel при нажатии на кнопку OK в диалоговом окне")
-    public void cancelNewsPublication() {
+    public void shouldCancelCreatingNews() {
         controlPanelPage.openCreatingNewsPage();
         createEditNewsPage.enterCategoryNews(randomCategory());
         createEditNewsPage.enterTitleNews(randomTitle);
         createEditNewsPage.setDate(0);
         createEditNewsPage.setTime(getCurrentTime());
         createEditNewsPage.enterNewsDescription(Data.DESCRIPTION_TEXT);
-        createEditNewsPage.pressCancel();
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnOkAlertDialog();
         controlPanelPage.showCreateNewsButton();
         createEditNewsPage.checkingTheResultOfNotCreatedNews(randomTitle);
     }
 
     // Editing News - страница редактирования новости
     @Test
-    @DisplayName("Доступность выбора одного значения из списка в поле Category на странице Editing News")
-    public void enterEachCategoryInTurn() {
+    @DisplayName("Заполнение поочередно каждым значением из списка в поле Category на странице Editing News")
+    public void shouldFillFieldOfCategoryByEachNewsCategoryInEditing() {
         createEditNewsPage.createNews(randomCategory(), randomTitle, 3, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
         createEditNewsPage.verifySelectedCategories();
+        //удаление созданной для теста новости, чтобы не засорять систему
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnOkAlertDialog();
+        createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
+        controlPanelPage.clickOnDeletingNews(randomTitle);
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
     @DisplayName("Редактирование статуса активной новости переключением тогла Active в неактивное состояние")
-    public void editedNewsStatusShouldBeNotActive() {
+    public void shouldEditNewsStatusToNotActive() {
         createEditNewsPage.createNews(Data.NEED_HELP_CATEGORY, randomTitle, 0, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
-        createEditNewsPage.activityToggle();
+        createEditNewsPage.clickOnActivityToggle();
         createEditNewsPage.clickOnSave();
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.checkStatusOfEditedNews(randomTitle, STATUS_NOT_ACTIVE);
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
     @DisplayName("Редактирование статуса неактивной новости переключением тогла Not active в активное состояние")
-    public void editedNewsStatusShouldBeActive() {
+    public void shouldEditNewsStatusToActive() {
         createEditNewsPage.createNews(Data.HOLIDAY_CATEGORY, randomTitle, 1, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
-        createEditNewsPage.activityToggle();
+        createEditNewsPage.clickOnActivityToggle();
         createEditNewsPage.clickOnSave();
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
-        createEditNewsPage.activityToggle();
+        createEditNewsPage.clickOnActivityToggle();
         createEditNewsPage.clickOnSave();
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.checkStatusOfEditedNews(randomTitle, STATUS_ACTIVE);
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
     @DisplayName("Редактирование новости с валидными значениями во всех полях формы")
-    public void shouldEditedNews() {
+    public void shouldEditNews() {
         createEditNewsPage.createNews(Data.ANNOUNCEMENT_CATEGORY, randomTitle, 0, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
@@ -182,7 +184,7 @@ public class CreateEditNewsPageTest {
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle + "editing");
         controlPanelPage.clickOnDeletingNews(randomTitle + "editing");
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
@@ -197,34 +199,34 @@ public class CreateEditNewsPageTest {
         createEditNewsPage.clickOnSave();
         createEditNewsPage.checkErrorMessage();
         //удаление созданной для теста новости, чтобы не засорять систему
-        createEditNewsPage.pressCancel();
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnOkAlertDialog();
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
     @DisplayName("Закрытие диалогового окна без выхода со страницы редактирования новости при нажатии на кнопку CANCEL в окне")
-    public void shouldGoBackToEditingNews() {
+    public void shouldGoBackToEditingNewsByCancelButtonInAlertDialog() {
         createEditNewsPage.createNews(Data.SALARY_CATEGORY, randomTitle, 2, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
         createEditNewsPage.enterCategoryNews(Data.GRATITUDE_CATEGORY);
-        createEditNewsPage.pressCancel();
-        createEditNewsPage.pressCancelAlertDialog();
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnCancelAlertDialog();
         createEditNewsPage.checkSearchResultIsDisplayed(Data.GRATITUDE_CATEGORY);
         //удаление созданной для теста новости, чтобы не засорять систему
-        createEditNewsPage.pressCancel();
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnOkAlertDialog();
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
     @DisplayName("Отмена редактирования новости и возврат на страницу Control panel при нажатии на кнопку OK в диалоговом окне")
-    public void cancelEditingNews() {
+    public void shouldCancelEditingNews() {
         createEditNewsPage.createNews(Data.NEED_HELP_CATEGORY, randomTitle, 1, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
@@ -233,13 +235,13 @@ public class CreateEditNewsPageTest {
         createEditNewsPage.setDate(0);
         createEditNewsPage.setTime(getCurrentTime());
         createEditNewsPage.enterNewsDescription(Data.DESCRIPTION_TEXT);
-        createEditNewsPage.pressCancel();
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnOkAlertDialog();
         controlPanelPage.showCreateNewsButton();
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.checkSearchResultIsDisplayed(randomTitle);
         //удаление созданной для теста новости, чтобы не засорять систему
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 }

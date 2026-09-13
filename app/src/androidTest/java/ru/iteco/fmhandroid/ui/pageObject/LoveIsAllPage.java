@@ -49,7 +49,7 @@ public class LoveIsAllPage {
             scrollToQuotePosition(i);
             Matcher<View> titleMatcher = allOf(withId(ITEM_TITLE_TEXT_VIEW), withText(quoteTitles[i]),
                     withParent(withParent(withId(MATERIAL_CARD_VIEW))), isDisplayed());
-            Allure.step("Проверка отображения текста цитаты с позицией " + (i));
+            Allure.step("Проверить отображение текста цитаты с позицией " + (i));
             ViewInteraction textView = onView(titleMatcher);
             textView.check(matches(isDisplayed()));
             textView.check(matches(withText(quoteTitles[i])));
@@ -62,14 +62,14 @@ public class LoveIsAllPage {
     }
 
     public void expandQuoteByPosition(int position) {
-        Allure.step("Нажатие на элемент списка по позиции: " + position);
+        Allure.step("Нажать на элемент списка по позиции: " + position);
         onView(allOf(withId(OUR_MISSION_ITEM_LIST_RECYCLER),
                 childAtPosition(withClassName(is(CONSTRAINT_LAYOUT_CLASS_NAME)), 0)))
                 .perform(actionOnItemAtPosition(position, click()));
     }
 
     public void checkQuoteDescription(String expectedText) {
-        Allure.step("Проверка текста описания цитаты: " + expectedText);
+        Allure.step("Проверить текст описания цитаты: " + expectedText);
         onView(allOf(withId(OUR_MISSION_DESCRIPTION), withText(expectedText),
                 withParent(withParent(withId(MATERIAL_CARD_VIEW))), isDisplayed()))
                 .check(matches(isCompletelyDisplayed()));

@@ -7,8 +7,6 @@ import static ru.iteco.fmhandroid.ui.data.Helper.randomCategory;
 import static ru.iteco.fmhandroid.ui.pageObject.ControlPanelPage.STATUS_ACTIVE;
 import static ru.iteco.fmhandroid.ui.pageObject.ControlPanelPage.STATUS_NOT_ACTIVE;
 
-import android.view.View;
-
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import org.junit.Before;
@@ -42,10 +40,9 @@ public class ControlPanelPageTest {
     ControlPanelPage controlPanelPage = new ControlPanelPage();
     CreateEditNewsPage createEditNewsPage = new CreateEditNewsPage();
 
-    private View decorView;
 
     @Before
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
         } catch (Exception e) {
@@ -54,7 +51,7 @@ public class ControlPanelPageTest {
         }
         authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
         authPage.clickOnSignIn();
-        Thread.sleep(1000);
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnNews();
         newsPage.openControlPanelPage();
@@ -72,7 +69,7 @@ public class ControlPanelPageTest {
     @DisplayName("Переход на страницу Control panel со страницы настройки фильтра Filter news через кнопку \"CANCEL\"")
     public void shouldGoToControlPanelPageFromFilterNewsPageByCancel() {
         controlPanelPage.openNewsFilter();
-        createEditNewsPage.pressCancel();
+        createEditNewsPage.clickOnCancel();
         controlPanelPage.showCreateNewsButton();
     }
 
@@ -84,23 +81,23 @@ public class ControlPanelPageTest {
     }
 
     @Test
-    @DisplayName("Переход на страницу страницу редактирования новости Editing News через кнопку редактирования на плашке новости")
+    @DisplayName("Переход на страницу редактирования новости Editing News через кнопку редактирования на плашке новости")
     public void shouldGoToEditingNewsPage() {
         createEditNewsPage.createNews(randomCategory(), randomTitle, 3, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         createEditNewsPage.openNewsEditor(randomTitle);
         controlPanelPage.verifyTextOnCreatingOrEditingNewsPage(Data.EDITING_PAGE_TEXT);
         //удаление созданной для теста новости, чтобы не засорять систему
-        createEditNewsPage.pressCancel();
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnCancel();
+        createEditNewsPage.clickOnOkAlertDialog();
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
     @DisplayName("Сортировка списка всех новостей по возрастанию даты публикации")
-    public void verifyNewsDateSortingAsc() {
+    public void shouldSortingAscByNewsDate() {
         String firstDateBeforeSorting = controlPanelPage.getFirstNewsDate();
         String lastDateBeforeSorting = controlPanelPage.getLastNewsDate();
         controlPanelPage.clickOnSortingNews();
@@ -112,7 +109,7 @@ public class ControlPanelPageTest {
 
     @Test
     @DisplayName("Сортировка списка всех новостей по убыванию даты публикации")
-    public void verifyNewsDateSortingDesc() {
+    public void shouldSortingDescByNewsDate() {
         String firstDateBeforeSorting = controlPanelPage.getFirstNewsDate();
         String lastDateBeforeSorting = controlPanelPage.getLastNewsDate();
         controlPanelPage.clickOnSortingNews();
@@ -125,7 +122,7 @@ public class ControlPanelPageTest {
 
     @Test
     @DisplayName("Фильтрация списка всех новостей по периоду времени, без категории, с активированными обоими чек-боксами по умолчанию")
-    public void shouldFilterNewsByDateRange() {
+    public void shouldFilterNewsByDateRangeWithAllStatusesWithoutCategory() {
         controlPanelPage.openNewsFilter();
         controlPanelPage.enterFromWhatDate(-14); // Дней назад
         controlPanelPage.enterUntilWhatDate(14); // Дней вперед
@@ -135,7 +132,7 @@ public class ControlPanelPageTest {
 
     @Test
     @DisplayName("Фильтрация списка всех новостей по категории + период времени + активирован чек-бокс Active")
-    public void shouldSearchForNewsViaFilterForCurrentDate() {
+    public void shouldFilterNewsByDateRangeWithCategoryWithStatusActive() {
         createEditNewsPage.createNews(Data.MASSAGE_CATEGORY, randomTitle, 30, "14:32", Data.DESCRIPTION_TEXT);
         controlPanelPage.openNewsFilter();
         createEditNewsPage.enterCategoryNews(Data.MASSAGE_CATEGORY);
@@ -148,12 +145,12 @@ public class ControlPanelPageTest {
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
     @DisplayName("Фильтрация всех новостей по статусу 'ACTIVE'")
-    public void checkAllNewsAreActive() {
+    public void shouldFilterNewsByStatusActive() {
         controlPanelPage.openNewsFilter();
         controlPanelPage.clickOnCheckBoxNotActive();
         controlPanelPage.clickOnApplyFilterButton();
@@ -162,7 +159,7 @@ public class ControlPanelPageTest {
 
     @Test
     @DisplayName("Фильтрация всех новостей по статусу 'NOT ACTIVE'")
-    public void checkAllNewsAreNotActive() {
+    public void shouldFilterNewsByStatusNotActive() {
         controlPanelPage.openNewsFilter();
         controlPanelPage.clickOnCheckBoxActive();
         controlPanelPage.clickOnApplyFilterButton();
@@ -170,9 +167,9 @@ public class ControlPanelPageTest {
     }
 
     @Test
-    @DisplayName("Фильтрация списка всех новостей с активированным чек-боксом Not active, без категории, без периода времени")
-    public void shouldFilterNewsByStatusNotActive() {
-        createEditNewsPage.theStatusOfTheEditedNewsIsNotActive(randomTitle);
+    @DisplayName("Поиск отредактированной новости со статусом Not active")
+    public void shouldSearchOneNewsWithStatusNotActive() {
+        createEditNewsPage.editNewsToNotActiveStatus(randomTitle);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.openNewsFilter();
         controlPanelPage.clickOnCheckBoxActive();
@@ -182,12 +179,12 @@ public class ControlPanelPageTest {
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
-    @DisplayName("Поиск через фильтр новости со статусом ACTIVE")
-    public void shouldFilterNewsByStatusActive() {
+    @DisplayName("Поиск созданной новости со статусом Active")
+    public void shouldSearchOneNewsWithStatusActive() {
         createEditNewsPage.createNews(Data.MASSAGE_CATEGORY, randomTitle, 0, "20:00", Data.DESCRIPTION_TEXT);
         controlPanelPage.openNewsFilter();
         controlPanelPage.clickOnCheckBoxNotActive();
@@ -197,7 +194,7 @@ public class ControlPanelPageTest {
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
@@ -209,7 +206,7 @@ public class ControlPanelPageTest {
         controlPanelPage.enterUntilWhatDate(30);
         controlPanelPage.clickOnCheckBoxActive();
         controlPanelPage.clickOnCheckBoxNotActive();
-        createEditNewsPage.pressCancel();
+        createEditNewsPage.clickOnCancel();
         controlPanelPage.showCreateNewsButton();
     }
 
@@ -219,13 +216,13 @@ public class ControlPanelPageTest {
         createEditNewsPage.createNews(randomCategory(), randomTitle, 10, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressCancelAlertDialog();
+        createEditNewsPage.clickOnCancelAlertDialog();
         controlPanelPage.showCreateNewsButton();
-        controlPanelPage.checkingTheResultOfNotDeletingNews(randomTitle);
+        createEditNewsPage.checkSearchResultIsDisplayed(randomTitle);
         //удаление созданной для теста новости, чтобы не засорять систему
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
+        createEditNewsPage.clickOnOkAlertDialog();
     }
 
     @Test
@@ -234,7 +231,9 @@ public class ControlPanelPageTest {
         createEditNewsPage.createNews(Data.GRATITUDE_CATEGORY, randomTitle, 7, getCurrentTime(), Data.DESCRIPTION_TEXT);
         createEditNewsPage.scrollingThroughTheNewsFeed(randomTitle);
         controlPanelPage.clickOnDeletingNews(randomTitle);
-        createEditNewsPage.pressOkAlertDialog();
-        controlPanelPage.checkingTheResultOfDeletingNews(randomTitle);
+        createEditNewsPage.clickOnOkAlertDialog();
+        controlPanelPage.verifyCreateNewsButtonVisible();
+        controlPanelPage.showCreateNewsButton();
+        createEditNewsPage.checkingTheResultOfNotCreatedNews(randomTitle);
     }
 }

@@ -8,20 +8,18 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static ru.iteco.fmhandroid.ui.data.Helper.waitId;
+import static ru.iteco.fmhandroid.ui.data.Helper.waitDisplayed;
 
 import android.view.View;
 
 import androidx.test.espresso.ViewInteraction;
 
 import org.hamcrest.Matchers;
-import org.hamcrest.core.IsInstanceOf;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
@@ -31,13 +29,12 @@ import ru.iteco.fmhandroid.ui.data.Data;
 public class AuthorizationPage {
     public static ViewInteraction LOGIN_INPUT = onView((allOf(withHint("Login"), withParent(withParent(withId(R.id.login_text_input_layout))))));
     public static ViewInteraction PASSWORD_INPUT = onView(allOf(withHint("Password"), withParent(withParent(withId(R.id.password_text_input_layout)))));
-    public static ViewInteraction SIGN_IN_BUTTON = onView(allOf(withId(R.id.enter_button), withText("SIGN IN"), withContentDescription("Save"), withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class)))));
-    public static int ENTER_BUTTON = R.id.enter_button;
+    public static ViewInteraction SIGN_IN_BUTTON = onView(withId(R.id.enter_button));
     private View decorView;
 
     public void verifySignInButtonVisible() {
         Allure.step("Проверка отображения кнопки SIGN IN на странице авторизации");
-        onView(isRoot()).perform(waitId((ENTER_BUTTON), 5000));
+        onView(isRoot()).perform(waitDisplayed(R.id.enter_button, 5000));
     }
 
     public void fillInTheAuthorizationFields(String loginText, String passwordText) {

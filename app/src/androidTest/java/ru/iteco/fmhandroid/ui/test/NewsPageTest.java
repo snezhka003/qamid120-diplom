@@ -1,7 +1,5 @@
 package ru.iteco.fmhandroid.ui.test;
 
-import android.view.View;
-
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import org.junit.Before;
@@ -35,10 +33,9 @@ public class NewsPageTest {
     ControlPanelPage controlPanelPage = new ControlPanelPage();
     CreateEditNewsPage createEditNewsPage = new CreateEditNewsPage();
 
-    private View decorView;
 
     @Before
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
         } catch (Exception e) {
@@ -47,7 +44,7 @@ public class NewsPageTest {
         }
         authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
         authPage.clickOnSignIn();
-        Thread.sleep(1000);
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnNews();
     }
@@ -63,14 +60,13 @@ public class NewsPageTest {
     @DisplayName("Переход на страницу раздела \"News\" со страницы настройки фильтра Filter news через кнопку \"CANCEL\"")
     public void shouldGoToNewsPageFromFilterNewsPageByCancel() {
         controlPanelPage.openNewsFilter();
-        createEditNewsPage.pressCancel();
+        createEditNewsPage.clickOnCancel();
         newsPage.showControlPanelButton();
     }
 
     @Test
     @DisplayName("Переход на страницу управления всеми новостями Control panel через кнопку редактирования в панели инструментов страницы")
-    public void shouldGoToControlPanelPage() throws InterruptedException {
-        Thread.sleep(1000);
+    public void shouldGoToControlPanelPage() {
         newsPage.openControlPanelPage();
         controlPanelPage.showCreateNewsButton();
     }

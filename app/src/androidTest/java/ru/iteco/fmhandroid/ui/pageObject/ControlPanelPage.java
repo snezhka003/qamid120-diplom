@@ -5,13 +5,13 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.hasSibling;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
@@ -20,6 +20,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import static ru.iteco.fmhandroid.ui.data.Helper.waitDisplayed;
 import static ru.iteco.fmhandroid.ui.pageObject.CreateEditNewsPage.NEWS_LIST;
 
 import android.view.View;
@@ -28,7 +29,6 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.core.IsInstanceOf;
 
 import java.time.LocalDate;
@@ -36,7 +36,6 @@ import java.time.format.DateTimeFormatter;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.ui.data.Data;
 import ru.iteco.fmhandroid.ui.data.Helper;
 
 
@@ -57,7 +56,6 @@ public class ControlPanelPage {
     public static ViewInteraction UNTIL_WHAT_DATE = onView(withId(R.id.news_item_publish_date_end_text_input_edit_text));
     public static ViewInteraction APPLY_FILTER_BUTTON = onView(withId(R.id.filter_button));
 
-    public View decorView;
 
     // Панель инструментов страницы
     public void clickOnSortingNews() {
@@ -69,6 +67,11 @@ public class ControlPanelPage {
         Allure.step("Открыть страницу настройки фильтра Filter news");
         FILTER_NEWS_MATERIAL.check(matches(isDisplayed())).perform(click());
         FILTER_NEWS_TITLE_TEXT.check(matches(isDisplayed()));
+    }
+
+    public void verifyCreateNewsButtonVisible() {
+        Allure.step("Проверка отображения кнопки создания новости");
+        onView(isRoot()).perform(waitDisplayed(R.id.add_news_image_view, 1000));
     }
 
     public void showCreateNewsButton() {
@@ -93,7 +96,7 @@ public class ControlPanelPage {
     }
 
     private void scrollToItem(int position) {
-        Allure.step("Скроллить список новостей до элемента на позиции " + position);
+        Allure.step("Прокрутить список новостей до элемента на позиции " + position);
         onView(withId(NEWS_LIST_RECYCLER_VIEW)).perform(RecyclerViewActions.scrollToPosition(position));
     }
 
@@ -141,7 +144,7 @@ public class ControlPanelPage {
     }
 
     public void scrollToNewsItem(int position) {
-        Allure.step("Прокручиваем к элементу новостей с позицией: " + position);
+        Allure.step("Прокрутить к элементу новости с позицией: " + position);
         NEWS_LIST.perform(scrollToPosition(position))
                 .perform(actionOnItemAtPosition(position, scrollTo()))
                 .check(matches(isDisplayed()));
@@ -176,7 +179,7 @@ public class ControlPanelPage {
     }
 
     public void verifyTextOnCreatingOrEditingNewsPage(String text) {
-        Allure.step("Отображение текста '" + text + "' после перехода на страницу");
+        Allure.step("Проверить отображение текста '" + text + "' после перехода на страницу");
         ViewInteraction textView = onView(allOf(withText(text),
                 withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                 isDisplayed()));
@@ -185,17 +188,7 @@ public class ControlPanelPage {
 
     // Удаление новости
     public void clickOnDeletingNews(String text) {
-        Allure.step("Удаление новости с заголовком '" + text + "'");
+        Allure.step("Нажать на кнопку удаления новости с заголовком '" + text + "'");
         onView(allOf(DELETE_BUTTON, hasSibling(withText(text)))).perform(click());
-    }
-
-    public void checkingTheResultOfDeletingNews(String text) {
-        Allure.step("Проверить удаление новости c заголовком '" + text + "'");
-        onView(allOf(withText(text), isDisplayed())).check(doesNotExist());
-    }
-
-    public void checkingTheResultOfNotDeletingNews(String text) {
-        Allure.step("Проверить неудаление новости c заголовком '" + text + "'");
-        onView(allOf(withText(text), isDisplayed())).check(matches(isDisplayed()));
     }
 }

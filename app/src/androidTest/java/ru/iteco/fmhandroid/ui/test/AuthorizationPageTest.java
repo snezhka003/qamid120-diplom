@@ -48,8 +48,7 @@ public class AuthorizationPageTest {
     public void registeredUserAuthorization() throws InterruptedException {
         authorizationPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
         authorizationPage.clickOnSignIn();
-        //Thread.sleep(1000);
-        mainPage.theAllNewsItemIsDisplayed();
+        mainPage.verifyAllNewsButtonVisible();
     }
 
     @Test
@@ -102,10 +101,9 @@ public class AuthorizationPageTest {
 
     @Test
     @DisplayName("Простая строка SQL инъекции в поле логин")
-    public void simpleSqlInjectionInLoginField() throws InterruptedException {
+    public void simpleSqlInjectionInLoginField() {
         authorizationPage.fillInTheAuthorizationFields(Data.SQL_INJECTION, Data.VALID_PASSWORD);
         authorizationPage.clickOnSignIn();
-        //Thread.sleep(500);
         authorizationPage.authorizationErrorMessageDisplay();
     }
 

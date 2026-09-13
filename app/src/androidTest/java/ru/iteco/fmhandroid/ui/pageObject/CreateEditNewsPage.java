@@ -83,17 +83,17 @@ public class CreateEditNewsPage {
     }
 
     public void clickOnSave() {
-        Allure.step("Сохранить новости нажатием SAVE");
+        Allure.step("Сохранить новость нажатием SAVE");
         SAVE_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
-    public void pressCancel() {
+    public void clickOnCancel() {
         Allure.step("Отменить создание новости нажатием CANCEL");
         CANCEL_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
     public void scrollingThroughTheNewsFeed(String text) {
-        Allure.step("Проскроллить до опубликованной новости '" + text + "'");
+        Allure.step("Прокрутить до опубликованной новости '" + text + "'");
         NEWS_LIST.check(matches(isDisplayed()))
                 .perform(RecyclerViewActions.scrollTo(hasDescendant(withText(text))));
     }
@@ -111,7 +111,7 @@ public class CreateEditNewsPage {
     }
 
     public void verifySelectedCategories() {
-        Allure.step("Указать поочередно каждую категорию в поле категории");
+        Allure.step("Получить список всех доступных категорий");
         List<String> categories = Arrays.asList(
                 Data.ANNOUNCEMENT_CATEGORY,
                 Data.BIRTHDAY_CATEGORY,
@@ -123,7 +123,7 @@ public class CreateEditNewsPage {
                 Data.NEED_HELP_CATEGORY
         );
         for (String category : categories) {
-            Allure.step("Установка категории '" + category + "'");
+            Allure.step("Указать категорию '" + category + "'");
             CATEGORY_PUBLICATION.check(matches(isDisplayed())).perform(replaceText(category), closeSoftKeyboard());
             onView(withText(category)).check(matches(isDisplayed()));
         }
@@ -141,19 +141,19 @@ public class CreateEditNewsPage {
     }
 
     // Диалоговое окно
-    public void pressOkAlertDialog() {
+    public void clickOnOkAlertDialog() {
         Allure.step("Нажать OK в диалоговом окне");
         OK_ALERT_DIALOG.check(matches(isDisplayed())).perform(click());
     }
 
-    public void pressCancelAlertDialog() {
+    public void clickOnCancelAlertDialog() {
         Allure.step("Нажать CANCEL в диалоговом окне");
         CANCEL_ALERT_DIALOG.check(matches(isDisplayed())).perform(click());
     }
 
     // Сообщение об ошибке
     public void checkErrorMessage() {
-        Allure.step("Сообщение об ошибке при попытке создать новость с незаполненными полями");
+        Allure.step("Проверить получение сообщения об ошибке при попытке создать новость с незаполненными полями");
         onView(withText(Data.POP_UP_ERROR_MESSAGE))
                 .inRoot(withDecorView(Matchers.not(decorView)))
                 .check(matches(isDisplayed()));
@@ -161,17 +161,17 @@ public class CreateEditNewsPage {
 
     // Редактирование новости
     public void openNewsEditor(String text) {
-        Allure.step("Редактирование новости с заголовком '" + text + "'");
+        Allure.step("Редактировать новость с заголовком '" + text + "'");
         onView(allOf(EDIT_BUTTON, hasSibling(withText(text)))).perform(click());
     }
 
-    public void activityToggle() {
-        Allure.step("Тогл активности/неактивности новости");
+    public void clickOnActivityToggle() {
+        Allure.step("Нажать на тогл активности/неактивности новости");
         TOGGLE_ACTIVE.check(matches(isDisplayed())).perform(click());
     }
 
     public ViewInteraction getNewsStatus(String title, String status) {
-        Allure.step("Получение статуса новости: \"" + title + "\" с ожидаемым статусом: \"" + status + "\"");
+        Allure.step("Получить статус новости: \"" + title + "\" с ожидаемым статусом: \"" + status + "\"");
         return onView(allOf(withText(status), withParent(withChild(withText(title)))));
     }
 
@@ -180,12 +180,12 @@ public class CreateEditNewsPage {
         getNewsStatus(title, expectedStatus).check(matches(isDisplayed()));
     }
 
-    public void theStatusOfTheEditedNewsIsNotActive(String randomTitle) {
-        Allure.step("Создание и редактирование новости в статус 'NOT ACTIVE'");
+    public void editNewsToNotActiveStatus(String randomTitle) {
+        Allure.step("Создать и редактировать новость в статус 'NOT ACTIVE'");
         createNews(Data.ANNOUNCEMENT_CATEGORY, randomTitle, 33, getCurrentTime(), Data.DESCRIPTION_TEXT);
         scrollingThroughTheNewsFeed(randomTitle);
         openNewsEditor(randomTitle);
-        activityToggle();
+        clickOnActivityToggle();
         clickOnSave();
     }
 }

@@ -7,8 +7,11 @@ import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasData;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
+
+import static ru.iteco.fmhandroid.ui.data.Helper.waitDisplayed;
 
 import android.content.Intent;
 
@@ -27,9 +30,9 @@ public class AboutPage {
     public static ViewInteraction PRIVACY_POLICY_BUTTON_LINK = onView(withId(R.id.about_privacy_policy_value_text_view));
     public static ViewInteraction TERMS_OF_USE_BUTTON_LINK = onView(withId(R.id.about_terms_of_use_value_text_view));
 
-    public void backButtonVisibility() {
-        Allure.step("Отображение кнопки Назад в навигационной панели приложения");
-        BACK_BUTTON_FROM_ABOUT_PAGE.check(matches(isDisplayed()));
+    public void verifyBackButtonVisible() {
+        Allure.step("Проверка отображения кнопки Назад в навигационной панели приложения");
+        onView(isRoot()).perform(waitDisplayed(R.id.about_back_image_button, 1000));
     }
 
     public void appVersionTextApproval() {

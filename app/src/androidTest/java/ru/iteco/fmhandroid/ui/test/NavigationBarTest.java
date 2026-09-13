@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Issue;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.Data;
@@ -49,8 +50,8 @@ public class NavigationBarTest {
 
     @Test
     @DisplayName("Переход на страницу раздела \"News\" с главной страницы Main через бургер-меню")
-    public void shouldGoToNewsPageFromMainPage() throws InterruptedException {
-        Thread.sleep(1000);
+    public void shouldGoToNewsPageFromMainPage() {
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnNews();
         newsPage.showControlPanelButton();
@@ -58,75 +59,70 @@ public class NavigationBarTest {
 
     @Test
     @DisplayName("Переход на главную страницу Main со страницы раздела \"News\" через бургер-меню")
-    public void shouldGoToMainPageFromNewsPage() throws InterruptedException {
-        //Thread.sleep(1000);
+    public void shouldGoToMainPageFromNewsPage() {
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnNews();
         newsPage.showControlPanelButton();
-        //Thread.sleep(1000);
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnMain();
-        //Thread.sleep(1000);
-        mainPage.theAllNewsItemIsDisplayed();
+        mainPage.verifyAllNewsButtonVisible();
     }
 
     @Test
     @DisplayName("Переход на страницу раздела \"About\" с главной страницы Main через бургер-меню")
-    public void shouldGoToAboutPageFromMainPage() throws InterruptedException {
-        Thread.sleep(1000);
+    public void shouldGoToAboutPageFromMainPage() {
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnAbout();
-        aboutPage.backButtonVisibility();
+        aboutPage.verifyBackButtonVisible();
     }
 
-    // отдельно работает, при запуске блока - падает
     @Test
     @DisplayName("Возврат на предыдущую страницу со страницы раздела \"About\" через кнопку Назад в навигационной панели приложения")
-    public void shouldGoBackFromAboutPage() throws InterruptedException {
-        Thread.sleep(1000);
+    public void shouldGoBackFromAboutPage() {
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnAbout();
-        //Thread.sleep(1000);
-        aboutPage.backButtonVisibility();
+        aboutPage.verifyBackButtonVisible();
         aboutPage.clickOnBack();
-        //Thread.sleep(1000);
-        mainPage.theAllNewsItemIsDisplayed();
+        mainPage.verifyAllNewsButtonVisible();
     }
 
     @Test // Тест не проходит! Заведен баг-репорт
     @DisplayName("Переход на страницу раздела \"About\" со страницы раздела News через бургер-меню")
-    public void shouldGoToAboutPageFromNewsPage() throws InterruptedException {
-        //Thread.sleep(1000);
+    @Issue("1")
+    public void shouldGoToAboutPageFromNewsPage() {
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnNews();
         newsPage.showControlPanelButton();
-        //Thread.sleep(1000);
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnAbout();
-        aboutPage.backButtonVisibility();
+        aboutPage.verifyBackButtonVisible();
     }
 
     @Test
     @DisplayName("Переход на страницу раздела \"Love is all\" через кнопку в навигационной панели приложения")
-    public void shouldGoToLoveIsAllPage() throws InterruptedException {
-        Thread.sleep(1000);
+    public void shouldGoToLoveIsAllPage() {
+        navigationBar.verifyLoveIsAllButtonVisible();
         navigationBar.openLoveIsAllPage();
         loveIsAllPage.visibilityTitleLoveIsAll();
     }
 
-    // отдельно работает, при запуске блока - падает
     @Test
     @DisplayName("Раскрытие доступного действия \"Log out\" в профиле через икноку-кнопку Человек в навигационной панели приложения ")
-    public void shouldBeVisibleLogOutInProfile() throws InterruptedException {
-        //Thread.sleep(1000);
+    public void shouldBeVisibleLogOutInProfile() {
         navigationBar.clickOnProfileImage();
-        //Thread.sleep(1000);
         navigationBar.showLogout();
     }
 
     @Test
     @DisplayName("Выход из учетной записи при нажатии на \"Log out\" в профиле")
     public void shouldLogOutOfAccount() {
+        navigationBar.verifyProfileButtonVisible();
         navigationBar.clickOnProfileImage();
         navigationBar.clickOnLogout();
         authPage.assertLoginField();

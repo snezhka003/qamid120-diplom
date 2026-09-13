@@ -30,7 +30,7 @@ public class AboutPageTest {
     AboutPage aboutPage = new AboutPage();
 
     @Before
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
         } catch (Exception e) {
@@ -39,7 +39,7 @@ public class AboutPageTest {
         }
         authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
         authPage.clickOnSignIn();
-        Thread.sleep(1000);
+        navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnAbout();
     }

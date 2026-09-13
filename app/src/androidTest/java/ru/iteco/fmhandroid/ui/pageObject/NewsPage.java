@@ -22,7 +22,7 @@ public class NewsPage {
     public View decorView;
 
     public void showControlPanelButton() {
-        Allure.step("Кнопка редактирования для перехода на страницу управления всеми новостями Control panel");
+        Allure.step("Проверить кликабельность кнопки редактирования для перехода на страницу управления всеми новостями Control panel");
         NEWS_MANAGEMENT_BUTTON.check(matches(allOf(isDisplayed(), isClickable())));
     }
 

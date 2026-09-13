@@ -4,8 +4,11 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
+
+import static ru.iteco.fmhandroid.ui.data.Helper.waitDisplayed;
 
 import androidx.test.espresso.ViewInteraction;
 
@@ -19,8 +22,13 @@ public class MainPage {
     public static ViewInteraction EXPAND_MATERIAL_BUTTON = onView(withId(R.id.expand_material_button));
 
 
+    public void verifyExpandMaterialButtonVisible() {
+        Allure.step("Проверка отображения кнопки аккордеона на главной странице Main");
+        onView(isRoot()).perform(waitDisplayed(R.id.expand_material_button, 1000));
+    }
+
     public void expandMaterialButton() {
-        Allure.step("Аккордеон на главной странице Main");
+        Allure.step("Нажать на кнопку аккордеона на главной странице Main");
         EXPAND_MATERIAL_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
@@ -29,9 +37,9 @@ public class MainPage {
         ALL_NEWS_TEXT_VIEW.check(matches(not(isDisplayed())));
     }
 
-    public void theAllNewsItemIsDisplayed() {
-        Allure.step("Проверка наличия элемента на главной странице Main");
-        ALL_NEWS_TEXT_VIEW.check(matches(isDisplayed()));
+    public void verifyAllNewsButtonVisible() {
+        Allure.step("Проверка наличия кнопки All News на главной странице Main");
+        onView(isRoot()).perform(waitDisplayed(R.id.all_news_text_view, 1000));
     }
 
     public void clickOnAllNews() {

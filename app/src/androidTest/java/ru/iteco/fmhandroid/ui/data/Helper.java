@@ -2,6 +2,7 @@ package ru.iteco.fmhandroid.ui.data;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.allOf;
 import static ru.iteco.fmhandroid.ui.data.Helper.RecyclerViewMatcher.withRecyclerView;
@@ -20,7 +21,6 @@ import androidx.test.espresso.PerformException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.espresso.util.HumanReadables;
 import androidx.test.espresso.util.TreeIterables;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -46,45 +46,40 @@ import ru.iteco.fmhandroid.R;
 
 public class Helper {
 
-    // Метод waitForView ожидает появления элемента на странице, чтобы убедиться, что он готов к взаимодействию.
-    public static ViewAction waitForView(final Matcher<View> viewMatcher, final long millis) {
+   // Метод ожидает появления и отображения элемента на странице, чтобы убедиться в его готовности к взаимодействию
+    public static ViewAction waitDisplayed(final int viewId, final long millis) {
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
-                return ViewMatchers.isRoot();
+                return isRoot();
             }
 
             @Override
             public String getDescription() {
-                return "wait for a specific view during " + millis + " millis.";
+                return "wait for a specific view with id <" + viewId + "> has been displayed during " + millis + " millis.";
             }
 
             @Override
             public void perform(final UiController uiController, final View view) {
                 uiController.loopMainThreadUntilIdle();
-                final long endTime = System.currentTimeMillis() + millis;
+                final long startTime = System.currentTimeMillis();
+                final long endTime = startTime + millis;
+                final Matcher<View> matchId = withId(viewId);
+                final Matcher<View> matchDisplayed = isDisplayed();
 
-                while (System.currentTimeMillis() < endTime) {
-                    if (isViewPresent(view, viewMatcher)) {
-                        return;
+                do {
+                    for (View child : TreeIterables.breadthFirstViewTraversal(view)) {
+                        if (matchId.matches(child) && matchDisplayed.matches(child)) {
+                            return;
+                        }
                     }
+
                     uiController.loopMainThreadForAtLeast(50);
                 }
+                while (System.currentTimeMillis() < endTime);
 
-                throw createTimeoutException(view);
-            }
-
-            private boolean isViewPresent(View rootView, Matcher<View> viewMatcher) {
-                for (View child : TreeIterables.breadthFirstViewTraversal(rootView)) {
-                    if (viewMatcher.matches(child)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            private PerformException createTimeoutException(View view) {
-                return new PerformException.Builder()
+                // timeout happens
+                throw new PerformException.Builder()
                         .withActionDescription(this.getDescription())
                         .withViewDescription(HumanReadables.describe(view))
                         .withCause(new TimeoutException())
@@ -93,21 +88,13 @@ public class Helper {
         };
     }
 
-    public static ViewAction waitId(final int viewId, final long millis) {
-        return waitForView(withId(viewId), millis);
-    }
-
-    public static ViewAction waitMatcher(final Matcher<View> matcher, final long millis) {
-        return waitForView(matcher, millis);
-    }
-
-    // Метод извлекает строку по идентификатору ресурса из ресурсов приложения.
+    // Метод извлекает строку по идентификатору из ресурсов приложения
     public static String getStringFromResource(int resourceId) {
         Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         return targetContext.getResources().getString(resourceId);
     }
 
-    // Метод возвращает количество элементов в указанном RecyclerView.
+    // Метод возвращает количество элементов в указанном RecyclerView
     public static int getRecyclerViewItemCount(@IdRes int recyclerViewId) {
         final int[] count = new int[1];
         onView(allOf(withId(recyclerViewId), isDisplayed()))
@@ -123,7 +110,7 @@ public class Helper {
         return count[0];
     }
 
-    // Метод получает текст из элемента новостей по заданной позиции.
+    // Метод получает текст из элемента новости по указанной позиции
     public static String getTextFromNews(int fieldId, int position) {
         final String[] itemText = new String[1];
         onView(withRecyclerView(R.id.news_list_recycler_view).atPosition(position))
@@ -137,7 +124,7 @@ public class Helper {
         return itemText[0];
     }
 
-    // Класс для поиска элементов в RecyclerView по позициям и идентификаторам.
+    // Класс для поиска элементов в RecyclerView по позициям и идентификаторам
     public static class RecyclerViewMatcher {
         private final int recyclerViewId;
 
@@ -217,7 +204,7 @@ public class Helper {
         };
     }
 
-    // Метод отвечает за выбор случайной категории из списка строк
+    // Метод отвечает за выбор случайной категории из списка
     private static final Random RANDOM = new Random();
 
     private static final List<String> CATEGORIES = Arrays.asList(
@@ -231,10 +218,6 @@ public class Helper {
             Data.NEED_HELP_CATEGORY
     );
 
-    public static int random(int... items) {
-        return items[RANDOM.nextInt(items.length)];
-    }
-
     public static String randomCategory() {
         return CATEGORIES.get(RANDOM.nextInt(CATEGORIES.size()));
     }
@@ -246,7 +229,7 @@ public class Helper {
         return String.format("%03d", randomNumber);
     }
 
-    // Параметр days может быть положительным для будущей даты и отрицательным для прошлой даты
+    // Метод возвращает значение даты, параметр days может быть положительным для будущей даты и отрицательным для прошлой даты
     public static String getDate(int days) {
         LocalDate date;
         if (days >= 0) {
@@ -262,11 +245,5 @@ public class Helper {
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return dateFormat.format(currentDate);
-    }
-
-    // Метод для ожидания
-    public static void pauseExecution(long millis) {
-        Allure.step("Ждем " + millis / 1000 + " сек");
-        SystemClock.sleep(millis);
     }
 }

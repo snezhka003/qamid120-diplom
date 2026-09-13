@@ -46,23 +46,25 @@ public class MainPageTest {
     @Test
     @DisplayName("Сворачивание списка опубликованных новостей кнопкой в заголовке News")
     public void collapsingListOfActiveNews() {
+        mainPage.verifyExpandMaterialButtonVisible();
         mainPage.expandMaterialButton();
         mainPage.allNewsItemNotDisplayed();
     }
 
     @Test
     @DisplayName("Разворачивание списка опубликованных новостей кнопкой в заголовке News")
-    public void expandingListOfActiveNews() throws InterruptedException {
-        Thread.sleep(1000);
+    public void expandingListOfActiveNews() {
+        mainPage.verifyExpandMaterialButtonVisible();
         mainPage.expandMaterialButton();
         mainPage.allNewsItemNotDisplayed();
         mainPage.expandMaterialButton();
-        mainPage.theAllNewsItemIsDisplayed();
+        mainPage.verifyAllNewsButtonVisible();
     }
 
     @Test
     @DisplayName("Переход на страницу раздела \"News\" с главной страницы через кнопку \"ALL NEWS\"")
     public void shouldGoToNewsPageByButtonAllNews() {
+        mainPage.verifyAllNewsButtonVisible();
         mainPage.clickOnAllNews();
         newsPage.showControlPanelButton();
     }

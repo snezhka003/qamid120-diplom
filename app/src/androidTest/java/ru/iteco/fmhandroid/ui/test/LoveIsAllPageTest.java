@@ -30,7 +30,7 @@ public class LoveIsAllPageTest {
     LoveIsAllPage loveIsAllPage = new LoveIsAllPage();
 
     @Before
-    public void setUp() throws InterruptedException {
+    public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
         } catch (Exception e) {
@@ -39,7 +39,7 @@ public class LoveIsAllPageTest {
         }
         authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
         authPage.clickOnSignIn();
-        Thread.sleep(500);
+        navigationBar.verifyLoveIsAllButtonVisible();
         navigationBar.openLoveIsAllPage();
     }
 

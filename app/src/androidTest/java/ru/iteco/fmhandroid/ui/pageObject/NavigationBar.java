@@ -4,9 +4,11 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.not;
+
+import static ru.iteco.fmhandroid.ui.data.Helper.waitDisplayed;
 
 import androidx.test.espresso.ViewInteraction;
 
@@ -24,6 +26,11 @@ public class NavigationBar {
     public static ViewInteraction PROFILE_IMAGE = onView(withId(R.id.authorization_image_button));
     public static ViewInteraction LOGOUT = onView(withText("Log out"));
 
+
+    public void verifyBurgerMenuButtonVisible() {
+        Allure.step("Проверка отображения кнопки бургер-меню в панели навигации");
+        onView(isRoot()).perform(waitDisplayed(R.id.main_menu_image_button, 1000));
+    }
 
     public void clickOnBurgerMenu() {
         Allure.step("Нажать на кнопку бургер-меню");
@@ -45,6 +52,11 @@ public class NavigationBar {
         ABOUT_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
+    public void verifyLoveIsAllButtonVisible() {
+        Allure.step("Проверка отображения иконки-кнопки Бабочка в панели навигации");
+        onView(isRoot()).perform(waitDisplayed(R.id.main_menu_image_button, 1000));
+    }
+
     public void openLoveIsAllPage() {
         Allure.step("Нажать на иконку-кнопку Бабочка в навигационной панели приложения");
         LOVE_IS_ALL_BUTTON.check(matches(isDisplayed())).perform(click());
@@ -53,6 +65,11 @@ public class NavigationBar {
     public void showLogout() {
         Allure.step("Отображение кнопки выхода из учетной записи");
         LOGOUT.check(matches(isDisplayed()));
+    }
+
+    public void verifyProfileButtonVisible() {
+        Allure.step("Проверка отображения иконки-кнопки Человек в панели навигации");
+        onView(isRoot()).perform(waitDisplayed(R.id.authorization_image_button, 1000));
     }
 
     public void clickOnProfileImage() {
