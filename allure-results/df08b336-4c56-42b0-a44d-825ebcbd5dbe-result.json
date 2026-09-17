@@ -1,0 +1,137 @@
+{
+    "name": "Простая строка SQL инъекции в поле пароль",
+    "start": 1789643372377,
+    "stop": 1789643377280,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+        {
+            "name": "Проверить отображение кнопки SIGN IN на странице авторизации",
+            "start": 1789643372688,
+            "stop": 1789643372688,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести логин:login2",
+            "start": 1789643375693,
+            "stop": 1789643375693,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести пароль:' OR '1'='1",
+            "start": 1789643375713,
+            "stop": 1789643375713,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на кнопку SIGN IN",
+            "start": 1789643375728,
+            "stop": 1789643375728,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить появление всплывающего сообщения об ошибке при авторизации",
+            "start": 1789643376219,
+            "stop": 1789643376219,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        }
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "df08b336-4c56-42b0-a44d-825ebcbd5dbe",
+    "historyId": "307bdacc916fb788d73dd973302837db",
+    "fullName": "ru.iteco.fmhandroid.ui.test.AuthorizationPageTest.simpleSqlInjectionInPasswordField",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.test"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.test.AuthorizationPageTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "simpleSqlInjectionInPasswordField"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.test.AuthorizationPageTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: io.qameta.allure.android.runners.AllureAndroidJUnitRunner(1715)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        },
+        {
+            "name": "epic",
+            "value": "Authorization - страница авторизации"
+        }
+    ]
+}

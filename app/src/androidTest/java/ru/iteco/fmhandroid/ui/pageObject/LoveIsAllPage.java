@@ -37,8 +37,8 @@ public class LoveIsAllPage {
     public final String CONSTRAINT_LAYOUT_CLASS_NAME = "androidx.constraintlayout.widget.ConstraintLayout";
 
 
-    public void visibilityTitleLoveIsAll() {
-        Allure.step("Отображение заголовка на странице");
+    public void checkVisibilityTitleLoveIsAll() {
+        Allure.step("Проверить отображение заголовка на странице");
         PAGE_TITLE_QUOTE.check(matches(isDisplayed()));
     }
 

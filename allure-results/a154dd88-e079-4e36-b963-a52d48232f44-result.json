@@ -1,0 +1,137 @@
+{
+    "name": "Сворачивание списка опубликованных новостей кнопкой в заголовке News",
+    "start": 1789644578174,
+    "stop": 1789644584213,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+        {
+            "name": "Проверить отображение кнопки SIGN IN на странице авторизации",
+            "start": 1789644578469,
+            "stop": 1789644578469,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить отображение кнопки All News на главной странице Main",
+            "start": 1789644583590,
+            "stop": 1789644583590,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить отображение кнопки аккордеона на главной странице Main",
+            "start": 1789644583604,
+            "stop": 1789644583604,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на кнопку аккордеона на главной странице Main",
+            "start": 1789644583608,
+            "stop": 1789644583608,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить отсутствие элемента на главной странице Main",
+            "start": 1789644583922,
+            "stop": 1789644583922,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        }
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "a154dd88-e079-4e36-b963-a52d48232f44",
+    "historyId": "b72222b3cabef38f9277b7f19676fc5e",
+    "fullName": "ru.iteco.fmhandroid.ui.test.MainPageTest.collapsingListOfActiveNews",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.test"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.test.MainPageTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "collapsingListOfActiveNews"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.test.MainPageTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: io.qameta.allure.android.runners.AllureAndroidJUnitRunner(1726)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        },
+        {
+            "name": "epic",
+            "value": "Раздел Main - главная страница"
+        }
+    ]
+}

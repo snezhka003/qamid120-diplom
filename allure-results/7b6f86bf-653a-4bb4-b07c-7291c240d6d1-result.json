@@ -1,0 +1,441 @@
+{
+    "name": "Редактирование статуса активной новости переключением тогла Active в неактивное состояние",
+    "start": 1789643597192,
+    "stop": 1789643607410,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+        {
+            "name": "Проверить отображение кнопки SIGN IN на странице авторизации",
+            "start": 1789643597391,
+            "stop": 1789643597391,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить отображение кнопки All News на главной странице Main",
+            "start": 1789643602531,
+            "stop": 1789643602531,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить отображение кнопки бургер-меню в панели навигации",
+            "start": 1789643602532,
+            "stop": 1789643602532,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на кнопку бургер-меню",
+            "start": 1789643602534,
+            "stop": 1789643602534,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Выбрать раздел News из списка разделов",
+            "start": 1789643602944,
+            "stop": 1789643602944,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Открыть страницу управления всеми новостями Control panel нажатием на кнопку редактирования",
+            "start": 1789643603307,
+            "stop": 1789643603307,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Создать новость c заголовком 'UI automated test news by Snezhka003 № 335'",
+            "start": 1789643603767,
+            "stop": 1789643603767,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Открыть страницу создания новости нажатием на иконку-кнопку создания",
+            "start": 1789643603767,
+            "stop": 1789643603767,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Указать категорию новости Нужна помощь",
+            "start": 1789643604150,
+            "stop": 1789643604150,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести заголовок новости 'UI automated test news by Snezhka003 № 335'",
+            "start": 1789643604178,
+            "stop": 1789643604178,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести дату публикации новости '0'",
+            "start": 1789643604205,
+            "stop": 1789643604205,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести время публикации новости '11:13'",
+            "start": 1789643604219,
+            "stop": 1789643604219,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести описание новости 'The text is generated by the UI automated test by Snezhka003'",
+            "start": 1789643604239,
+            "stop": 1789643604239,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Сохранить новость нажатием на кнопку SAVE",
+            "start": 1789643604245,
+            "stop": 1789643604245,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проскроллить до опубликованной новости 'UI automated test news by Snezhka003 № 335'",
+            "start": 1789643604821,
+            "stop": 1789643604822,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Открыть страницу редактирования новости с заголовком 'UI automated test news by Snezhka003 № 335' нажатием на иконку-кнопку редактирования",
+            "start": 1789643604888,
+            "stop": 1789643604889,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на тогл активности/неактивности новости",
+            "start": 1789643605306,
+            "stop": 1789643605306,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Сохранить новость нажатием на кнопку SAVE",
+            "start": 1789643605874,
+            "stop": 1789643605875,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проскроллить до опубликованной новости 'UI automated test news by Snezhka003 № 335'",
+            "start": 1789643606243,
+            "stop": 1789643606243,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить, что новость \"UI automated test news by Snezhka003 № 335\" имеет статус: \"Not active\"",
+            "start": 1789643606262,
+            "stop": 1789643606262,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Получить статус новости: \"UI automated test news by Snezhka003 № 335\" с ожидаемым статусом: \"Not active\"",
+            "start": 1789643606262,
+            "stop": 1789643606262,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проскроллить до опубликованной новости 'UI automated test news by Snezhka003 № 335'",
+            "start": 1789643606264,
+            "stop": 1789643606264,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на иконку-кнопку удаления новости с заголовком 'UI automated test news by Snezhka003 № 335'",
+            "start": 1789643606279,
+            "stop": 1789643606279,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на кнопку OK в диалоговом окне",
+            "start": 1789643606642,
+            "stop": 1789643606642,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        }
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "7b6f86bf-653a-4bb4-b07c-7291c240d6d1",
+    "historyId": "4f251071ec38046515d2e5e627eaffcd",
+    "fullName": "ru.iteco.fmhandroid.ui.test.CreateEditNewsPageTest.shouldEditNewsStatusToNotActive",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.test"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.test.CreateEditNewsPageTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldEditNewsStatusToNotActive"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.test.CreateEditNewsPageTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: io.qameta.allure.android.runners.AllureAndroidJUnitRunner(1715)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        },
+        {
+            "name": "epic",
+            "value": "Creating News - страница создания новости, Editing News - страница редактирования новости"
+        }
+    ]
+}

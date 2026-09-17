@@ -1,0 +1,137 @@
+{
+    "name": "Авторизация с валидными данными зарегистрированного пользователя",
+    "start": 1789644285976,
+    "stop": 1789644290213,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+        {
+            "name": "Проверить отображение кнопки SIGN IN на странице авторизации",
+            "start": 1789644287257,
+            "stop": 1789644287257,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести логин:login2",
+            "start": 1789644289273,
+            "stop": 1789644289273,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Ввести пароль:password2",
+            "start": 1789644289292,
+            "stop": 1789644289292,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на кнопку SIGN IN",
+            "start": 1789644289318,
+            "stop": 1789644289318,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверить отображение кнопки All News на главной странице Main",
+            "start": 1789644289926,
+            "stop": 1789644289926,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        }
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "b092dca3-b096-4756-a4c0-80837ce104f6",
+    "historyId": "756610b5072b93fbc09e1451888a2226",
+    "fullName": "ru.iteco.fmhandroid.ui.test.AuthorizationPageTest.registeredUserAuthorization",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.test"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.test.AuthorizationPageTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "registeredUserAuthorization"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.test.AuthorizationPageTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: io.qameta.allure.android.runners.AllureAndroidJUnitRunner(1726)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        },
+        {
+            "name": "epic",
+            "value": "Authorization - страница авторизации"
+        }
+    ]
+}

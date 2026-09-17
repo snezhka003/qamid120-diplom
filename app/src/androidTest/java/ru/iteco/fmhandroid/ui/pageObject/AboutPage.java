@@ -31,52 +31,52 @@ public class AboutPage {
     public static ViewInteraction TERMS_OF_USE_BUTTON_LINK = onView(withId(R.id.about_terms_of_use_value_text_view));
 
     public void verifyBackButtonVisible() {
-        Allure.step("Проверка отображения кнопки Назад в навигационной панели приложения");
+        Allure.step("Проверить отображение кнопки Назад в навигационной панели приложения");
         onView(isRoot()).perform(waitDisplayed(R.id.about_back_image_button, 1000));
     }
 
     public void appVersionTextApproval() {
-        Allure.step("Отображение заголовка подблока Version");
+        Allure.step("Проверить отображение заголовка подблока Version");
         VERSION_TEXT.check(matches(isDisplayed()));
     }
 
     public void appVersionNumberApproval() {
-        Allure.step("Отображение номера версии приложения");
+        Allure.step("Проверить отображение номера версии приложения");
         VERSION_NUMBER.check(matches(isDisplayed()));
     }
 
     public void assertDisplayOfPrivacyPolicyLabel() {
-        Allure.step("Отображение заголовка подблока Privacy Policy");
+        Allure.step("Проверить отображение заголовка подблока Privacy Policy");
         LABEL_PRIVACY_POLICY.check(matches(isDisplayed()));
     }
 
     public void assertDisplayOfTermsOfUseLabel() {
-        Allure.step("Отображение заголовка подблока Terms of use");
+        Allure.step("Проверить отображение заголовка подблока Terms of use");
         LABEL_TERMS_OF_USE.check(matches(isDisplayed()));
     }
 
     public void assertDisplayTheCompanyNameLabel() {
-        Allure.step("Отображение наименования компании-разработчика");
+        Allure.step("Проверить отображение наименования компании-разработчика");
         LABEL_COMPANY_TEXT.check(matches(isDisplayed()));
     }
 
     public void clickOnBack() {
-        Allure.step("Нажать кнопку Назад в навигационной панели приложения");
+        Allure.step("Нажать на кнопку Назад в навигационной панели приложения");
         BACK_BUTTON_FROM_ABOUT_PAGE.check(matches(isDisplayed())).perform(click());
     }
 
     public void clickOnPrivacyPolicy() {
-        Allure.step("Клик на ссылку Политика конфиденциальности");
+        Allure.step("Кликнуть на ссылку Политика конфиденциальности");
         PRIVACY_POLICY_BUTTON_LINK.check(matches(isDisplayed())).perform(click());
     }
 
     public void clickOnTermsOfUse() {
-        Allure.step("Клик на ссылку Условия эксплуатации");
+        Allure.step("Кликнуть на ссылку Условия эксплуатации");
         TERMS_OF_USE_BUTTON_LINK.check(matches(isDisplayed())).perform(click());
     }
 
     public void verifyIntent(String expectedUrl) {
-        Allure.step("Проверка, что инициирован Intent с действием VIEW и верным URL");
+        Allure.step("Проверить, что инициирован Intent с действием VIEW и верным URL");
         intended(allOf(
                 hasAction(Intent.ACTION_VIEW),
                 hasData(expectedUrl)

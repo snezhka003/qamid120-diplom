@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Epic;
 import io.qameta.allure.kotlin.Issue;
+import io.qameta.allure.kotlin.Link;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.Data;
@@ -40,12 +41,22 @@ public class NavigationBarTest {
     public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
+            // Кнопка авторизации видна → просто сразу логинимся и далее переходим к тесту
+            authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+            authPage.clickOnSignIn();
         } catch (Exception e) {
-            navigationBar.clickOnProfileImage();
-            navigationBar.clickOnLogout();
+            // Кнопки авторизации нет → проверяем текст-кнопку ALL NEWS, тем самым убеждаемся, что находимся на главной странице
+            try {
+                mainPage.verifyAllNewsButtonVisible();
+                // Текст-кнопка ALL NEWS есть → сразу переходим к тесту
+            } catch (Exception e2) {
+                // Текст-кнопки ALL NEWS тоже нет → разлогиниваемся, логинимся заново и переходим к тесту
+                navigationBar.clickOnProfileImage();
+                navigationBar.clickOnLogout();
+                authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+                authPage.clickOnSignIn();
+            }
         }
-        authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
-        authPage.clickOnSignIn();
     }
 
     @Test
@@ -93,6 +104,7 @@ public class NavigationBarTest {
     @Test // Тест не проходит! Заведен баг-репорт
     @DisplayName("Переход на страницу раздела \"About\" со страницы раздела News через бургер-меню")
     @Issue("1")
+    @Link(name = "Ссылка на баг-репорт #1", url = "https://github.com/snezhka003/qamid120-diplom/issues/1")
     public void shouldGoToAboutPageFromNewsPage() {
         navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
@@ -109,7 +121,7 @@ public class NavigationBarTest {
     public void shouldGoToLoveIsAllPage() {
         navigationBar.verifyLoveIsAllButtonVisible();
         navigationBar.openLoveIsAllPage();
-        loveIsAllPage.visibilityTitleLoveIsAll();
+        loveIsAllPage.checkVisibilityTitleLoveIsAll();
     }
 
     @Test

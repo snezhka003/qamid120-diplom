@@ -23,7 +23,7 @@ public class MainPage {
 
 
     public void verifyExpandMaterialButtonVisible() {
-        Allure.step("Проверка отображения кнопки аккордеона на главной странице Main");
+        Allure.step("Проверить отображение кнопки аккордеона на главной странице Main");
         onView(isRoot()).perform(waitDisplayed(R.id.expand_material_button, 1000));
     }
 
@@ -33,12 +33,12 @@ public class MainPage {
     }
 
     public void allNewsItemNotDisplayed() {
-        Allure.step("Проверка отсутствия элемента на главной странице Main");
+        Allure.step("Проверить отсутствие элемента на главной странице Main");
         ALL_NEWS_TEXT_VIEW.check(matches(not(isDisplayed())));
     }
 
     public void verifyAllNewsButtonVisible() {
-        Allure.step("Проверка наличия кнопки All News на главной странице Main");
+        Allure.step("Проверить отображение кнопки All News на главной странице Main");
         onView(isRoot()).perform(waitDisplayed(R.id.all_news_text_view, 1000));
     }
 

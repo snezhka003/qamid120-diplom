@@ -33,7 +33,7 @@ public class AuthorizationPage {
     private View decorView;
 
     public void verifySignInButtonVisible() {
-        Allure.step("Проверка отображения кнопки SIGN IN на странице авторизации");
+        Allure.step("Проверить отображение кнопки SIGN IN на странице авторизации");
         onView(isRoot()).perform(waitDisplayed(R.id.enter_button, 5000));
     }
 
@@ -45,24 +45,24 @@ public class AuthorizationPage {
     }
 
     public void clickOnSignIn() {
-        Allure.step("Нажать кнопку SIGN IN");
+        Allure.step("Нажать на кнопку SIGN IN");
         SIGN_IN_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
     public void assertLoginField() {
-        Allure.step("Проверка отображения поля логина");
+        Allure.step("Проверить отображение поля логина");
         LOGIN_INPUT.check(matches(isDisplayed()));
     }
 
     public void authorizationErrorMessageDisplay() {
-        Allure.step("Всплывающее сообщение об ошибке при авторизации");
+        Allure.step("Проверить появление всплывающего сообщения об ошибке при авторизации");
         onView(withText(Data.AUTHENTICATION_ERROR_MESSAGE))
                 .inRoot(withDecorView(Matchers.not(decorView)))
                 .check(matches(isDisplayed()));
     }
 
     public void emptyFieldErrorMessageDisplay() {
-        Allure.step("Всплывающее сообщение о пустом поле при авторизации");
+        Allure.step("Проверить появление всплывающего сообщения о пустом поле при авторизации");
         onView(withText(Data.EMPTY_FIELDS_ERROR_MESSAGE))
                 .inRoot(withDecorView(Matchers.not(decorView)))
                 .check(matches(isDisplayed()));

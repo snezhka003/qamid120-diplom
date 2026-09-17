@@ -59,28 +59,28 @@ public class ControlPanelPage {
 
     // Панель инструментов страницы
     public void clickOnSortingNews() {
-        Allure.step("Нажать кнопку сортировки новостей");
+        Allure.step("Нажать на иконку-кнопку сортировки новостей");
         SORT_NEWS_MATERIAL.check(matches(allOf(isDisplayed(), isClickable()))).perform(click());
     }
 
     public void openNewsFilter() {
-        Allure.step("Открыть страницу настройки фильтра Filter news");
+        Allure.step("Открыть страницу настройки фильтра Filter news нажатием на иконку-кнопку фильтрации");
         FILTER_NEWS_MATERIAL.check(matches(isDisplayed())).perform(click());
         FILTER_NEWS_TITLE_TEXT.check(matches(isDisplayed()));
     }
 
     public void verifyCreateNewsButtonVisible() {
-        Allure.step("Проверка отображения кнопки создания новости");
+        Allure.step("Проверить отображение иконки-кнопки создания новости");
         onView(isRoot()).perform(waitDisplayed(R.id.add_news_image_view, 1000));
     }
 
     public void showCreateNewsButton() {
-        Allure.step("Показать кнопку создания новости");
+        Allure.step("Показать иконку-кнопку создания новости");
         ADD_NEWS_BUTTON.check(matches(isDisplayed()));
     }
 
     public void openCreatingNewsPage() {
-        Allure.step("Открыть страницу создания новости");
+        Allure.step("Открыть страницу создания новости нажатием на иконку-кнопку создания");
         ADD_NEWS_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
@@ -134,7 +134,7 @@ public class ControlPanelPage {
     }
 
     public void clickOnApplyFilterButton() {
-        Allure.step("Применить фильтр");
+        Allure.step("Применить фильтр нажатием на кнопку FILTER");
         APPLY_FILTER_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
@@ -144,7 +144,7 @@ public class ControlPanelPage {
     }
 
     public void scrollToNewsItem(int position) {
-        Allure.step("Прокрутить к элементу новости с позицией: " + position);
+        Allure.step("Проскроллить к элементу новости с позицией: " + position);
         NEWS_LIST.perform(scrollToPosition(position))
                 .perform(actionOnItemAtPosition(position, scrollTo()))
                 .check(matches(isDisplayed()));
@@ -188,7 +188,7 @@ public class ControlPanelPage {
 
     // Удаление новости
     public void clickOnDeletingNews(String text) {
-        Allure.step("Нажать на кнопку удаления новости с заголовком '" + text + "'");
+        Allure.step("Нажать на иконку-кнопку удаления новости с заголовком '" + text + "'");
         onView(allOf(DELETE_BUTTON, hasSibling(withText(text)))).perform(click());
     }
 }

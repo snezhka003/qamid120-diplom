@@ -83,17 +83,17 @@ public class CreateEditNewsPage {
     }
 
     public void clickOnSave() {
-        Allure.step("Сохранить новость нажатием SAVE");
+        Allure.step("Сохранить новость нажатием на кнопку SAVE");
         SAVE_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
     public void clickOnCancel() {
-        Allure.step("Отменить создание новости нажатием CANCEL");
+        Allure.step("Отменить создание новости нажатием на кнопку CANCEL");
         CANCEL_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
     public void scrollingThroughTheNewsFeed(String text) {
-        Allure.step("Прокрутить до опубликованной новости '" + text + "'");
+        Allure.step("Проскроллить до опубликованной новости '" + text + "'");
         NEWS_LIST.check(matches(isDisplayed()))
                 .perform(RecyclerViewActions.scrollTo(hasDescendant(withText(text))));
     }
@@ -142,12 +142,12 @@ public class CreateEditNewsPage {
 
     // Диалоговое окно
     public void clickOnOkAlertDialog() {
-        Allure.step("Нажать OK в диалоговом окне");
+        Allure.step("Нажать на кнопку OK в диалоговом окне");
         OK_ALERT_DIALOG.check(matches(isDisplayed())).perform(click());
     }
 
     public void clickOnCancelAlertDialog() {
-        Allure.step("Нажать CANCEL в диалоговом окне");
+        Allure.step("Нажать на кнопку CANCEL в диалоговом окне");
         CANCEL_ALERT_DIALOG.check(matches(isDisplayed())).perform(click());
     }
 
@@ -161,7 +161,7 @@ public class CreateEditNewsPage {
 
     // Редактирование новости
     public void openNewsEditor(String text) {
-        Allure.step("Редактировать новость с заголовком '" + text + "'");
+        Allure.step("Открыть страницу редактирования новости с заголовком '" + text + "' нажатием на иконку-кнопку редактирования");
         onView(allOf(EDIT_BUTTON, hasSibling(withText(text)))).perform(click());
     }
 

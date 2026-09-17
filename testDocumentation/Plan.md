@@ -189,11 +189,11 @@
 - ТК107	Выход из учетной записи при нажатии на "Log out" в профиле
 
 ### 5. Тестовая документация на проекте
-- [План тестирования](Plan.md#план-тестирования-мобильного-приложения-мобильный-хоспис) с описанием плана по проверке и автоматизации приложения (`Plan.md`)
-- [Чек-лист проекта](Check.xlsx) с отметками о пройденных и непройденных тестах (`Check.xlsx`)
-- [Тест-кейсы](Cases.xlsx) для проверки приложения (`Cases.xlsx`)
-- Allure-отчет с отчётом о результатах прогона тестов (Allure)
-- Файл Result.md с результатом сравнения времени проверки приложения по чек-листу руками и UI-тестами.
+- [План тестирования](https://github.com/snezhka003/qamid120-diplom/blob/main/testDocumentation/Plan.md) с описанием плана по проверке и автоматизации приложения (`Plan.md`).
+- [Чек-лист проекта](https://docs.google.com/spreadsheets/d/1xE6oUr9-SeurN3_9VY3d1skQQkNQ7AeYkwOGbOEw8Q8/edit?usp=sharing) с отметками о пройденных и непройденных тестах (`Check.xlsx`).
+- [Тест-кейсы](https://docs.google.com/spreadsheets/d/1WS3Qg8ySSW5-AdegiRGk2JIqebN37PbZnpQT_xx3nts/edit?usp=sharing) для проверки приложения (`Cases.xlsx`).
+- [Allure-отчет](https://github.com/snezhka003/qamid120-diplom/blob/main/testDocumentation/allure-results.zip) с отчётом о результатах прогона тестов (`allure-results.zip`).
+- [Файл](https://github.com/snezhka003/qamid120-diplom/blob/main/testDocumentation/Result.md) с результатом сравнения времени проверки приложения по чек-листу руками и UI-тестами (`Result.md`).
 
 ### 6. Перечень используемых инструментов тестирования
 - **Android Studio** - официальная интегрированная среда разработки основана на IntelliJ IDEA для создания приложений на платформе Android.

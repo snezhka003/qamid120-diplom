@@ -27,7 +27,7 @@ public class NewsPage {
     }
 
     public void openControlPanelPage() {
-        Allure.step("Открыть страницу управления всеми новостями Control panel");
+        Allure.step("Открыть страницу управления всеми новостями Control panel нажатием на кнопку редактирования");
         NEWS_MANAGEMENT_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 }

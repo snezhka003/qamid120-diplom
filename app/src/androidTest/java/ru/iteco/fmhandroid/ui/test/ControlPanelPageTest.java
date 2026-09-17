@@ -16,10 +16,12 @@ import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Flaky;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.Data;
 import ru.iteco.fmhandroid.ui.pageObject.AuthorizationPage;
+import ru.iteco.fmhandroid.ui.pageObject.MainPage;
 import ru.iteco.fmhandroid.ui.pageObject.NavigationBar;
 import ru.iteco.fmhandroid.ui.pageObject.CreateEditNewsPage;
 import ru.iteco.fmhandroid.ui.pageObject.ControlPanelPage;
@@ -36,6 +38,7 @@ public class ControlPanelPageTest {
 
     AuthorizationPage authPage = new AuthorizationPage();
     NavigationBar navigationBar = new NavigationBar();
+    MainPage mainPage = new MainPage();
     NewsPage newsPage = new NewsPage();
     ControlPanelPage controlPanelPage = new ControlPanelPage();
     CreateEditNewsPage createEditNewsPage = new CreateEditNewsPage();
@@ -45,12 +48,22 @@ public class ControlPanelPageTest {
     public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
+            // Кнопка авторизации видна → сразу логинимся и далее выполняем нужные действия
+            authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+            authPage.clickOnSignIn();
         } catch (Exception e) {
-            navigationBar.clickOnProfileImage();
-            navigationBar.clickOnLogout();
+            // Кнопки авторизации нет → проверяем текст-кнопку ALL NEWS, тем самым убеждаемся, что находимся на главной странице
+            try {
+                mainPage.verifyAllNewsButtonVisible();
+                // Текст-кнопка ALL NEWS есть → сразу выполняем нужные действия
+            } catch (Exception e2) {
+                // Текст-кнопки ALL NEWS тоже нет → разлогиниваемся, логинимся заново и выполняем нужные действия
+                navigationBar.clickOnProfileImage();
+                navigationBar.clickOnLogout();
+                authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+                authPage.clickOnSignIn();
+            }
         }
-        authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
-        authPage.clickOnSignIn();
         navigationBar.verifyBurgerMenuButtonVisible();
         navigationBar.clickOnBurgerMenu();
         navigationBar.clickOnNews();
@@ -226,6 +239,7 @@ public class ControlPanelPageTest {
     }
 
     @Test
+    @Flaky
     @DisplayName("Удаление созданной новости")
     public void deletingCreatedNews() {
         createEditNewsPage.createNews(Data.GRATITUDE_CATEGORY, randomTitle, 7, getCurrentTime(), Data.DESCRIPTION_TEXT);

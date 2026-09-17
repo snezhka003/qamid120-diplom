@@ -9,7 +9,6 @@ import static ru.iteco.fmhandroid.ui.data.Helper.RecyclerViewMatcher.withRecycle
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -20,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.PerformException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.util.HumanReadables;
 import androidx.test.espresso.util.TreeIterables;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -40,7 +38,6 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
-import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 
 

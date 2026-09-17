@@ -28,7 +28,7 @@ public class NavigationBar {
 
 
     public void verifyBurgerMenuButtonVisible() {
-        Allure.step("Проверка отображения кнопки бургер-меню в панели навигации");
+        Allure.step("Проверить отображение кнопки бургер-меню в панели навигации");
         onView(isRoot()).perform(waitDisplayed(R.id.main_menu_image_button, 1000));
     }
 
@@ -53,7 +53,7 @@ public class NavigationBar {
     }
 
     public void verifyLoveIsAllButtonVisible() {
-        Allure.step("Проверка отображения иконки-кнопки Бабочка в панели навигации");
+        Allure.step("Проверить отображение иконки-кнопки Бабочка в панели навигации");
         onView(isRoot()).perform(waitDisplayed(R.id.main_menu_image_button, 1000));
     }
 
@@ -63,7 +63,7 @@ public class NavigationBar {
     }
 
     public void showLogout() {
-        Allure.step("Отображение кнопки выхода из учетной записи");
+        Allure.step("Проверить отображение кнопки выхода из учетной записи");
         LOGOUT.check(matches(isDisplayed()));
     }
 

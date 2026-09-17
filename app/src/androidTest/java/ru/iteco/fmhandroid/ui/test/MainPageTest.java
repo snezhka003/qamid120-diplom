@@ -35,12 +35,22 @@ public class MainPageTest {
     public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
+            // Кнопка авторизации видна → просто сразу логинимся и далее переходим к тесту
+            authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+            authPage.clickOnSignIn();
         } catch (Exception e) {
-            navigationBar.clickOnProfileImage();
-            navigationBar.clickOnLogout();
+            // Кнопки авторизации нет → проверяем текст-кнопку ALL NEWS, тем самым убеждаемся, что находимся на главной странице
+            try {
+                mainPage.verifyAllNewsButtonVisible();
+                // Текст-кнопка ALL NEWS есть → сразу переходим к тесту
+            } catch (Exception e2) {
+                // Текст-кнопки ALL NEWS тоже нет → разлогиниваемся, логинимся заново и переходим к тесту
+                navigationBar.clickOnProfileImage();
+                navigationBar.clickOnLogout();
+                authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+                authPage.clickOnSignIn();
+            }
         }
-        authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
-        authPage.clickOnSignIn();
     }
 
     @Test

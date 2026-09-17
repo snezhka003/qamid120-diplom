@@ -13,6 +13,7 @@ import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.Data;
 import ru.iteco.fmhandroid.ui.pageObject.AuthorizationPage;
+import ru.iteco.fmhandroid.ui.pageObject.MainPage;
 import ru.iteco.fmhandroid.ui.pageObject.NavigationBar;
 import ru.iteco.fmhandroid.ui.pageObject.LoveIsAllPage;
 
@@ -27,18 +28,29 @@ public class LoveIsAllPageTest {
 
     AuthorizationPage authPage = new AuthorizationPage();
     NavigationBar navigationBar = new NavigationBar();
+    MainPage mainPage = new MainPage();
     LoveIsAllPage loveIsAllPage = new LoveIsAllPage();
 
     @Before
     public void setUp() {
         try {
             authPage.verifySignInButtonVisible();
+            // Кнопка авторизации видна → сразу логинимся и далее выполняем нужные действия
+            authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+            authPage.clickOnSignIn();
         } catch (Exception e) {
-            navigationBar.clickOnProfileImage();
-            navigationBar.clickOnLogout();
+            // Кнопки авторизации нет → проверяем текст-кнопку ALL NEWS, тем самым убеждаемся, что находимся на главной странице
+            try {
+                mainPage.verifyAllNewsButtonVisible();
+                // Текст-кнопка ALL NEWS есть → сразу выполняем нужные действия
+            } catch (Exception e2) {
+                // Текст-кнопки ALL NEWS тоже нет → разлогиниваемся, логинимся заново и выполняем нужные действия
+                navigationBar.clickOnProfileImage();
+                navigationBar.clickOnLogout();
+                authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
+                authPage.clickOnSignIn();
+            }
         }
-        authPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
-        authPage.clickOnSignIn();
         navigationBar.verifyLoveIsAllButtonVisible();
         navigationBar.openLoveIsAllPage();
     }

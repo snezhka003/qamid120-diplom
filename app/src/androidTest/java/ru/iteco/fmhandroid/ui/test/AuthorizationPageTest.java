@@ -45,7 +45,7 @@ public class AuthorizationPageTest {
 
     @Test
     @DisplayName("Авторизация с валидными данными зарегистрированного пользователя")
-    public void registeredUserAuthorization() throws InterruptedException {
+    public void registeredUserAuthorization() {
         authorizationPage.fillInTheAuthorizationFields(Data.VALID_LOGIN, Data.VALID_PASSWORD);
         authorizationPage.clickOnSignIn();
         mainPage.verifyAllNewsButtonVisible();
