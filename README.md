@@ -1,14 +1,18 @@
-# Дипломный проект по профессии [«Инженер по тестированию»](https://github.com/netology-code/qamid-diplom)
+# Дипломный проект по профессии «Инженер по тестированию»
 
 ## Тестовая документация
 
-- [План](testDocumentation/Plan.md) по проверке и автоматизации приложения (`testDocumentation/Plan.md`).
+- [План тестирования](https://github.com/snezhka003/qamid120-diplom/blob/main/testDocumentation/Plan.md) по проверке и автоматизации приложения (`testDocumentation/Plan.md`).
 
 - [Чек-лист](https://docs.google.com/spreadsheets/d/1xE6oUr9-SeurN3_9VY3d1skQQkNQ7AeYkwOGbOEw8Q8/edit?usp=sharing) c отметками о пройденных и не пройденных тестах (`testDocumentation/Check.xlsx`).
 
 - [Тест-кейсы](https://docs.google.com/spreadsheets/d/1WS3Qg8ySSW5-AdegiRGk2JIqebN37PbZnpQT_xx3nts/edit?usp=sharing) для проверки приложения (`testDocumentation/Cases.xlsx`).
 
 - [Баг-репорты](https://github.com/snezhka003/qamid120-diplom/issues) оформленные как `Issues`.
+
+- [Allure-отчет](https://github.com/snezhka003/qamid120-diplom/blob/main/testDocumentation/allure-results.zip) с результатами прогона авто-тестов, запакованный в zip-архив (`testDocumentation/allure-results.zip`).
+
+- [Ручной отчет о тестировании](https://github.com/snezhka003/qamid120-diplom/blob/main/testDocumentation/Result.md) с результатом сравнения времени проверки приложения по чек-листу руками и UI-тестами (`testDocumentation/Result.md`).
 
 ## Запуск авто-тестов в Android Studio
 ### 1. Условия для запуска авто-тестов
@@ -34,3 +38,28 @@
   2. Открыть нужный тестовый класс:
      * слева от названия тестового класса нажать на иконку двойного знака запуска, чтобы запустить все тесты класса,
      * слева от описания отдельного теста нажать на иконку знака запуска, чтобы запустить конкретно этот тест.
+
+### 4. Формирование Allure-отчёта
+- Установить [Allure](https://allurereport.org/docs/v2/install/) на ваш ПК.
+- Экспортировать результаты тестов с эмулятора/устройства в проект:
+  * После выполнения всех автотестов откройте окно Device Explorer в Android Studio:
+    * Первый способ (через меню): в меню Android Studio выберите View → Tool Windows → Device Explorer. Появится отдельное окно со списком подключённых устройств (в том числе эмуляторов).
+    * Второй способ (быстрый): на панели инструментов в правой части окна есть кнопка Device Explorer — нажмите на неё, и окно откроется сразу.
+  * В окне перейдите в директорию `/data/data/ru.iteco.fmhandroid.ui/files/allure-results`.
+  * Кликните правой кнопкой мыши на папку `allure-results` и выберите опцию Save As....
+  * В корне проекта создайте папку `allure-result` и сохраните в нее экспортированные шагом ранее файлы.
+- Сгенерировать отчёт:
+  * Перейдите в терминал и убедитесь, что находитесь в корневой директории проекта.
+  * Выполните необходимую вам команду:
+    ```bash
+       # для быстрого анализа результатов тестирования
+       # запускает временный веб-сервер, который динамически генерирует и показывает отчет на основе JSON-данных:
+       allure serve
+    
+       # для генерации HTML-отчёта:
+       allure generate allure-results -o allure-report
+    
+       # открывает сгенерированный HTML-отчёт в браузере:
+       allure open allure-report
+    ```
+- Теперь можно просматривать результаты выполнения автотестов в удобном и наглядном формате Allure-отчёта.
